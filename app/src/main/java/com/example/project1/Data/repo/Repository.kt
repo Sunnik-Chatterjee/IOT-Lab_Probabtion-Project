@@ -1,5 +1,6 @@
 package com.example.project1.Data.repo
 
+import android.util.Log
 import com.example.project1.Data.model.Anime
 import com.example.project1.Data.model.AnimeDetail
 import com.example.project1.Data.remote.API
@@ -9,30 +10,17 @@ import javax.inject.Inject
 class Repository @Inject constructor(private val api: API) {
 
     // Fetch Anime List
-    suspend fun getAnimeList(page: Int): UIstate<Anime> {
+    suspend fun getAnimeList(): UIstate<Anime> {
         return try {
-            val response = api.getAnimeList(page = page)
-            if (response.isSuccessful) {
-                UIstate.Success(response.body()!!)
+            val response = api.getAllDetails(query = "") // Fetch all anime with no filter
+            if (response.isSuccessful && response.body() != null) {
+                UIstate.Success(response.body())
             } else {
-                UIstate.Error("Failed to fetch anime list: ${response.message()}")
+                UIstate.Error("Failed to fetch anime list")
             }
-        } catch (e: Exception) {
-            UIstate.Error("Exception occurred: ${e.localizedMessage}")
+        }catch (e:Exception){
+            UIstate.Error(e.message ?: "Network request failed")
         }
     }
 
-    // Fetch Anime Details
-    suspend fun getAnimeDetails(id: Int): UIstate<AnimeDetail> {
-        return try {
-            val response = api.getAnimeInfo(id)
-            if (response.isSuccessful) {
-                UIstate.Success(response.body()!!)
-            } else {
-                UIstate.Error("Failed to fetch anime details: ${response.message()}")
-            }
-        } catch (e: Exception) {
-            UIstate.Error("Exception occurred: ${e.localizedMessage}")
-        }
-    }
 }

@@ -60,6 +60,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation ("androidx.navigation:navigation-compose:2.7.3")
+
     //dagger-hilt
     val hiltVersion = "2.48"
     implementation("com.google.dagger:hilt-android:$hiltVersion")

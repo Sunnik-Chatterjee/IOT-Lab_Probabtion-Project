@@ -11,8 +11,8 @@ import javax.inject.Singleton
 @Singleton
 interface API {
     @GET("anime")
-    suspend fun getAnimeList(
-        @Query("page") page: Int = 1 // Example query parameter for pagination
+    suspend fun getAllDetails(
+        @Query("q") query: String
     ): Response<Anime>
 
     @GET("anime/{animeID}")
