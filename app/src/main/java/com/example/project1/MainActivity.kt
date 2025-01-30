@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.project1.View.StartingScreen
+import com.example.project1.navigation.AppNavigation
 import com.example.project1.ui.theme.Project1Theme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,14 +20,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
-                StartingScreen()
-
+                AppNavigation()
         }
     }
 }
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-        StartingScreen()
+        AppNavigation()
 }
